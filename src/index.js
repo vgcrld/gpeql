@@ -15,17 +15,21 @@ function items(parent, args, context, info) {
 }
 
 resolvers.Query = {
+
   item: (parent,args,context,info) => {
     return ch.query(`select * from __items where item_id = ${args.item_id}`)
   },
-  items: (parent,{limit},context,info) => {
-    if (typeof limit === "undefined" ) {
-      sql = `select * from __items`
-    } else {
-      sql = `select * from __items limit ${limit}`
-    }
+
+  items: (parent,{sql},context,info) => {
+    sql = `select * from __items ${sql}`
+    return ch.query(sql)
+  },
+
+  configs: (parent,{sql},context,info) => {
+    sql = `select * from __configs ${sql}`
     return ch.query(sql)
   }
+
 }
 
 

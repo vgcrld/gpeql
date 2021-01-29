@@ -1,6 +1,8 @@
 type Query {
   item(item_id: Int!): [Item!]
-  items(limit: Int): [Item!]
+  items(sql: String = ""): [Item!]
+  configs(sql: String = ""): [Config!]
+
 }
 
 type Item {
@@ -28,5 +30,15 @@ type Item {
   last_epoch:              Int  
   first_trend_epoch:       Int 
   last_trend_epoch:        Int 
+}
 
+type Config {
+  type:                    String
+  item_id:                 Int
+  poll_epoch_ns:           Float
+  config_id:               Int
+  config_value:            String
+  insert_ts:               Int
+  poll_ts:                 Int
+  poll_epoch:              Int
 }

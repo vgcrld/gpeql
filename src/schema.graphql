@@ -1,16 +1,10 @@
 type Query {
   info: String!
-  feed: [Link!]!
-  link(id: Int!): Link!
+  items: [Items!]!
 }
 
-type Mutation {
-  post(url: String!, description: String!): Link!
-  add(url: String!, description: String!): Link!
-}
-
-type Link {
-  id: ID!
-  description: String!
-  url: String!
+type Items {
+  item_id: ID!
+  name: String!
+  key: String!
 }

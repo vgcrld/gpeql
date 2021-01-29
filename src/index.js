@@ -1,38 +1,36 @@
 const { ApolloServer } = require("apollo-server");
+const GpeClickhouse = require("./clickhouse")
+
+
+ch = new GpeClickhouse('data__atsgroup');
+ch.getItems()
+
+
 
 const fs = require("fs");
 const path = require("path");
 
-function addAPost(parent, args, context, info) {
-  const newLink = context.prisma.link.create({
-    data: {
-      url: args.url,
-      description: args.description,
-    },
-  });
-  return newLink;
+const resolvers = {}
+
+function items(parent, args, context, info) {
+  console.log(clickhouse.sql.items)
+  return {};
 }
 
-const resolvers = {
-  Query: {
-    info: () => `This is the API of a Hackernews Clone`,
-    feed: async (parent, args, context) => {
-      return context.prisma.link.findMany();
-    },
-    link: async (parent, args, context) => {
-      return context.prisma.link.findUnique({ where: { id: args.id } });
-    },
-  },
+function about() { 
+  return "Copyright 2021 Rich Davis" 
+} 
 
-  Mutation: {
-    post: addAPost,
-    add: addAPost,
-  },
-};
+resolvers.Query = {
+    info: () => about(),
+    items: items,
+  }
+
 
 const server = new ApolloServer({
   typeDefs: fs.readFileSync(path.join(__dirname, "schema.graphql"), "utf8"),
   resolvers,
+  context: ch
 });
 
 server.listen().then(({ url }) => console.log(`Server is running on ${url}`));

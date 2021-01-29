@@ -22,11 +22,8 @@ class GpeClickhouse {
 
     } 
 
-    async getItems() {
-        const r = await this.connection
-        .query(`select * from __items limit 10`)
-        .toPromise()
-        .then( p => console.log(p) );
+    query(sql) {
+        return this.connection.query(sql).toPromise()
     }
 
 }

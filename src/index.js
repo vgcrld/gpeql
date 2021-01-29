@@ -3,9 +3,6 @@ const GpeClickhouse = require("./clickhouse")
 
 
 ch = new GpeClickhouse('data__atsgroup');
-ch.getItems()
-
-
 
 const fs = require("fs");
 const path = require("path");
@@ -17,14 +14,19 @@ function items(parent, args, context, info) {
   return {};
 }
 
-function about() { 
-  return "Copyright 2021 Rich Davis" 
-} 
-
 resolvers.Query = {
-    info: () => about(),
-    items: items,
+  item: (parent,args,context,info) => {
+    return ch.query(`select * from __items where item_id = ${args.item_id}`)
+  },
+  items: (parent,{limit},context,info) => {
+    if (typeof limit === "undefined" ) {
+      sql = `select * from __items`
+    } else {
+      sql = `select * from __items limit ${limit}`
+    }
+    return ch.query(sql)
   }
+}
 
 
 const server = new ApolloServer({

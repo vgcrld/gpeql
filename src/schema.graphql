@@ -1,10 +1,32 @@
 type Query {
-  info: String!
-  items: [Items!]!
+  item(item_id: Int!): [Item!]
+  items(limit: Int): [Item!]
 }
 
-type Items {
-  item_id: ID!
-  name: String!
-  key: String!
+type Item {
+  item_id:                 Int
+  name:                    String
+  tags:                    [String]
+  key:                     String
+  type:                    String
+  file_key:                String
+  first_epoch_ns:          Float
+  last_epoch_ns:           Float
+  first_trend_epoch_ns:    Float
+  last_trend_epoch_ns:     Float
+  alias:                   String
+  reporting:               Int
+  loading:                 Int
+  visible:                 Int
+  insert_ts:               String
+  update_ts:               String 
+  first_ts:                String 
+  last_ts:                 String 
+  first_trend_ts:          String 
+  last_trend_ts:           String 
+  first_epoch:             Int  
+  last_epoch:              Int  
+  first_trend_epoch:       Int 
+  last_trend_epoch:        Int 
+
 }

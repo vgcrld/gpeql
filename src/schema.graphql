@@ -1,6 +1,9 @@
 type Query {
+
   item(item_id: Int!): [Item!]
+  
   items(sql: String = ""): [Item!]
+  
   configs(sql: String = ""): [Config!]
 
 }

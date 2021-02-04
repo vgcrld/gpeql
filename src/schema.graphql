@@ -6,6 +6,7 @@ type Query {
   
   configs(sql: String = ""): [Config!]
 
+  config_names(sql: String = ""): [ConfigNames!]
 }     
 type Item {
   item_id:                 Int
@@ -44,3 +45,9 @@ type Config {
   poll_ts:                 Int
   poll_epoch:              Int
 }
+
+type ConfigNames {
+  id:                      Int 
+  string:                  String
+  insert_ts:               String 
+ }

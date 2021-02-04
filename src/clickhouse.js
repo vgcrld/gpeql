@@ -23,7 +23,6 @@ class GpeClickhouse {
     } 
 
     query(sql) {
-        console.log(sql)
         return this.connection.query(sql).toPromise()
     }
 

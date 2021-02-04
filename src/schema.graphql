@@ -6,8 +6,7 @@ type Query {
   
   configs(sql: String = ""): [Config!]
 
-}
-
+}     
 type Item {
   item_id:                 Int
   name:                    String

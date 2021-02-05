@@ -35,19 +35,15 @@ type Item {
   last_trend_epoch:        Int 
 }
 
-type Config {
-  type:                    String
-  item_id:                 Int
-  poll_epoch_ns:           Float
-  config_id:               Int
-  config_value:            String
-  insert_ts:               Int
-  poll_ts:                 Int
-  poll_epoch:              Int
-}
-
 type ConfigNames {
   id:                      Int 
   string:                  String
   insert_ts:               String 
+ }
+
+ type Config {
+   type:                   String
+   item_id:                Int
+   config_id:              Int 
+   config_value:           String
  }

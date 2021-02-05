@@ -7,7 +7,11 @@ type Query {
   configs(sql: String = ""): [Config!]
 
   config_names(sql: String = ""): [ConfigNames!]
+
+  item_info(where: String = "", limit: Int=0, having: String = "" ): [ItemInfo!]
+
 }     
+
 type Item {
   item_id:                 Int
   name:                    String
@@ -46,4 +50,10 @@ type ConfigNames {
    item_id:                Int
    config_id:              Int 
    config_value:           String
+ }
+
+ type ItemInfo {
+   type:                   String
+   tags:                   [String]
+   count:                  Int
  }
